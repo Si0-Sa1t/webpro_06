@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>数字当て</title>
+</head>
+<body>
+    <h2>数字当て</h2>
+    <p>1から10の数字です(小文字)</p>
+    <p>コンピュータの数字を当ててください</p>
+    <p>あなたは<%= your %>です．</p>
+    <p>コンピュータは<%= cpu %>です．</p>
+    <p>判定：<%= judgement %></p>
+    <p>現在<%= total %>試合中<%= win %>回予想が当たっています．</p>
+    <hr>
+    <form action="/dododo">
+        <input type="text" name="hand" required>
+        <label for="hand">1~10の数字で入力してください(小文字)</label>
+        <input type="hidden" name="win" value="<%= win %>">
+        <input type="hidden" name="total" value="<%= total %>">
+        <input type="submit" values="じゃんけん　ポン">
+    </form>   
+</body>
+</html>

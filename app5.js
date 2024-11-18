@@ -43,7 +43,6 @@ app.get("/janken", (req, res) => {
   if (hand == cpu) {
     judgement = 'あいこ';
   } else if (
-    (hand == 'グー' && cpu == 'チョキ') ||
     (hand == 'チョキ' && cpu == 'パー') ||
     (hand == 'パー' && cpu == 'グー')
   ) {
@@ -65,9 +64,57 @@ app.get("/janken", (req, res) => {
   res.render( 'janken', display );
 });
 
+//app.listen(8080, () => console.log("Example app listening on port 8080!"));
+
+
+//app.get("/wow",(req,res)=>{
+  
+//})
+
+
+app.get("/dododo", (req, res) => {
+  let hand = req.query.hand;
+  let win = Number( req.query.win ) || 0;//Numberのおかげ
+  let total = Number( req.query.total ) || 0;
+  console.log( {hand, win, total});
+  const num = Math.floor( Math.random() * 10 + 1 );
+  let cpu = '';
+  if( num==1 ) cpu = '1';
+  else if( num==2 ) cpu = '2';
+  else if( num==3 ) cpu = '3';
+  else if( num==4 ) cpu = '4';
+  else if( num==5 ) cpu = '5';
+  else if( num==6 ) cpu = '6';
+  else if( num==7 ) cpu = '7';
+  else if( num==8 ) cpu = '8';
+  else if( num==9 ) cpu = '9';
+  else  cpu = '10';
+  // ここに勝敗の判定を入れる
+  // 今はダミーで人間の勝ちにしておく
+  let judgement = '';
+  if (hand == cpu) {
+    judgement = 'あたり';
+  win += 1;
+  }
+   else {
+    judgement = 'はずれ';
+  }
+  total += 1;
+
+  
+  const display = { //表示する変数
+    your: hand,
+    cpu: cpu,
+    judgement: judgement,
+    win: win,
+    total: total
+  }
+  res.render( 'dododo', display );
+});
+
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
 
 
-app.get("/wow",(rew,res)=>{
-  a
+app.get("/wow",(req,res)=>{
+  
 })
