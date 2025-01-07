@@ -115,3 +115,36 @@ app.get("/dododo", (req, res) => {
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
 
 
+
+app.get("/janken2", (req, res) => {
+  let userDirection = req.query.direction || '';  // ユーザーが選んだ方向
+  let cpuDirection = '';
+  let result = '';
+  let win = Number(req.query.win) || 0;  // 勝ち数
+  let total = Number(req.query.total) || 0;  // 試合数
+
+  // コンピューターがランダムに方向を選ぶ
+  const directions = ['上', '右', '下', '左'];
+  const randomIndex = Math.floor(Math.random() * directions.length);
+  cpuDirection = directions[randomIndex];
+
+  // 勝敗判定
+  if (userDirection === cpuDirection) {
+    result = '勝ち';
+    win += 1;
+  } else {
+    result = '負け';
+  }
+
+  total += 1;
+
+  const displayData = {
+    userDirection: userDirection,
+    cpuDirection: cpuDirection,
+    result: result,
+    win: win,
+    total: total
+  };
+
+  res.render('janken2', displayData);  // EJS に渡すデータ
+});
